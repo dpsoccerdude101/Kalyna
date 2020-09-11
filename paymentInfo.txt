@@ -1,0 +1,21 @@
+import React, { useEffect } from "react";
+
+const PaymentInformation = (props) => {
+  useEffect(() => {
+    let total = 0;
+    if (props.students.length > 0) total += 240;
+    if (props.students.length > 1) total += 95;
+    if (props.students.length > 2) total += 70 * (props.students.length - 2);
+    if (props.volunteer == "no") total += 50;
+    props.setTotalTuition(total);
+  });
+  return (
+    <>
+      <h3>Payment Information</h3>
+      <h5 name="totalTuition">
+        Total Due: {"$" + props.totalTuition.toString() + ".00"}
+      </h5>
+    </>
+  );
+};
+export default PaymentInformation;
