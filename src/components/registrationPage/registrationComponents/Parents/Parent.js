@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   isPhoneNumberLengthValid,
   isPhoneNumberValid,
@@ -17,7 +17,7 @@ export const Parent = (props) => {
     }
   })();
   const numParent = (() => {
-    if (props.type == EMERGENCY_CONTACT) return "";
+    if (props.type === EMERGENCY_CONTACT) return "";
     else {
       switch (props.index) {
         case 0:
@@ -102,7 +102,7 @@ export const Parent = (props) => {
           name={"receiveIncomingTextMessages" + props.type}
           required
           style={
-            props.parent.receiveIncomingTextMessages == "yes"
+            props.parent.receiveIncomingTextMessages === "yes"
               ? {
                   background:
                     "url(data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=) no-repeat center center",
@@ -112,7 +112,7 @@ export const Parent = (props) => {
               : {}
           }
           value="yes"
-          checked={props.parent.receiveIncomingTextMessages == "yes"}
+          checked={props.parent.receiveIncomingTextMessages === "yes"}
           onChange={(e) => {
             handleChange(e, "receiveIncomingTextMessages");
           }}
@@ -123,7 +123,7 @@ export const Parent = (props) => {
           name={"receiveIncomingTextMessages" + props.type}
           required
           style={
-            props.parent.receiveIncomingTextMessages == "no"
+            props.parent.receiveIncomingTextMessages === "no"
               ? {
                   background:
                     "url(data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=) no-repeat center center",
@@ -133,7 +133,7 @@ export const Parent = (props) => {
               : {}
           }
           value="no"
-          checked={props.parent.receiveIncomingTextMessages == "no"}
+          checked={props.parent.receiveIncomingTextMessages === "no"}
           onChange={(e) => handleChange(e, "receiveIncomingTextMessages")}
         />
       </section>

@@ -18,7 +18,7 @@ const Volunteering = (props) => {
         value="yes"
         required
         style={
-          props.volunteer == "yes"
+          props.volunteer === "yes"
             ? {
                 background:
                   "url(data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=) no-repeat center center",
@@ -27,7 +27,7 @@ const Volunteering = (props) => {
               }
             : {}
         }
-        checked={props.volunteer == "yes"}
+        checked={props.volunteer === "yes"}
         onChange={(e) => props.setVolunteer(e.target.value)}
       />
       <label htmlFor="yesVolunteer">
@@ -38,7 +38,7 @@ const Volunteering = (props) => {
         name="volunteerRadio"
         value="no"
         style={
-          props.volunteer == "no"
+          props.volunteer === "no"
             ? {
                 background:
                   "url(data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=) no-repeat center center",
@@ -47,7 +47,7 @@ const Volunteering = (props) => {
               }
             : {}
         }
-        checked={props.volunteer == "no"}
+        checked={props.volunteer === "no"}
         onChange={(e) => {
           props.setVolunteer(e.target.value);
           props.setVolunteerRole("");
@@ -57,7 +57,7 @@ const Volunteering = (props) => {
         No, I unfortunately will not be able to volunteer this year{" "}
         {String.fromCharCode(38)} will pay the $50 Volunteer Fee.
       </label>
-      {props.volunteer == "yes" ? (
+      {props.volunteer === "yes" ? (
         <VolunteerOptions
           volunteerRole={props.volunteerRole}
           setVolunteerRole={(arr) => props.setVolunteerRole(arr)}

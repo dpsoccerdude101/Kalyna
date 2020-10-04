@@ -16,7 +16,7 @@ const PaymentInformation = (props) => {
   const [promocode, setPromocode] = useState("");
   useEffect(() => {
     let total = 0;
-    if (promocode == masterPromocode.code) {
+    if (promocode === masterPromocode.code) {
       total = 40;
       props.setPromocodeApplied(true);
     } else {
@@ -24,7 +24,7 @@ const PaymentInformation = (props) => {
       if (props.students.length > 0) total += 240;
       if (props.students.length > 1) total += 95;
       if (props.students.length > 2) total += 70 * (props.students.length - 2);
-      if (props.volunteer == "no") total += 50;
+      if (props.volunteer === "no") total += 50;
     }
     props.setTotalTuition(total);
   });

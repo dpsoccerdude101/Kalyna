@@ -1,4 +1,3 @@
-import { Student } from "./Students/Student";
 import Parent from "../registrationComponents/Parents/Parent";
 import React from "react";
 import { EMERGENCY_CONTACT } from "../registrationComponents/Parents/parentTypes";

@@ -141,7 +141,7 @@ const RegistrationPage = (props) => {
         setSubmit("student already registered");
       }
     }
-  }, [importedData]);
+  }, [importedData, students]);
 
   /**
    *
@@ -200,7 +200,7 @@ const RegistrationPage = (props) => {
       /**
        * If a volunteer role is chosen then append it as a property to that person object
        */
-      if (volunteerRole != "") {
+      if (volunteerRole !== "") {
         addVolunteerRoleToPerson(
           [parents, students, emergencyContacts],
           [setParents, setStudents, setEmergencyContacts],
@@ -214,7 +214,7 @@ const RegistrationPage = (props) => {
   /**
    * Runs all of the event-driven-programming after the submit button is pushed
    */
-  useEffect(() => submitReducer(submit, setSubmit), [submit]);
+  useEffect(() => submitReducer(submit, setSubmit), [submit, submitReducer]);
   return (
     <>
       <SuccessMessage submit={submit} errorMessage={errorMessage} />

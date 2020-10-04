@@ -10,6 +10,7 @@ const CodeOfConduct = (props) => {
         <a
           href="https://www.uafgr.org/wp-content/uploads/2019/10/Kalyna_CodeofConduct.pdf"
           target="_blank"
+          rel="noopener noreferrer"
         >
           PLEASE DOWNLOAD AND READ THE CODE OF CONDUCT, PHOTO RELEASE, VOLUNTEER
           AGREEMENT {String.fromCharCode(38)} MEDICAL RELEASE
@@ -18,6 +19,7 @@ const CodeOfConduct = (props) => {
         <a
           href="https://www.uafgr.org/wp-content/uploads/2020/09/KALYNA_COVIDWaiver.pdf"
           target="_blank"
+          rel="noopener noreferrer"
         >
           PLEASE DOWNLOAD AND READ THE COVID-19 WAIVER
         </a>

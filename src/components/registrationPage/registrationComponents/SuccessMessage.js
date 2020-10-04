@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 
 const SuccessMessage = (props) => {
-  return props.submit == "loading" ? (
+  return props.submit === "loading" ? (
     <div className="ui icon message" style={{ position: "fixed", top: "0" }}>
       <i className="notched circle loading icon"></i>
       <div className="content">
@@ -9,7 +9,7 @@ const SuccessMessage = (props) => {
         <p>We're registering your student dancer(s) for you.</p>
       </div>
     </div>
-  ) : props.submit == "volunteer role" ? (
+  ) : props.submit === "volunteer role" ? (
     <div className="ui icon message" style={{ position: "fixed", top: "0" }}>
       <i className="notched circle loading icon"></i>
       <div className="content">
@@ -19,7 +19,7 @@ const SuccessMessage = (props) => {
         </p>
       </div>
     </div>
-  ) : props.submit == "student already registered" ? (
+  ) : props.submit === "student already registered" ? (
     <div className="ui error message">
       <div className="header">
         The student you have entered is already registered.
@@ -29,7 +29,7 @@ const SuccessMessage = (props) => {
       </ul>
     </div>
   ) 
-  : props.submit == "loading payment" ? (
+  : props.submit === "loading payment" ? (
     <div className="ui icon message" style={{ position: "fixed", top: "0" }}>
       <i className="notched circle loading icon"></i>
       <div className="content">
@@ -40,7 +40,7 @@ const SuccessMessage = (props) => {
         </p>
       </div>
     </div>
-  ) : props.submit == "payment accepted" ? (
+  ) : props.submit === "payment accepted" ? (
     <div className="ui icon message" style={{ position: "fixed", top: "0" }}>
       <i className="notched circle loading icon"></i>
       <div className="content">
@@ -51,7 +51,7 @@ const SuccessMessage = (props) => {
         </p>
       </div>
     </div>
-  ) : props.submit == "payment intent accepted" ? (
+  ) : props.submit === "payment intent accepted" ? (
     <div className="ui icon message" style={{ position: "fixed", top: "0" }}>
       <i className="notched circle loading icon"></i>
       <div className="content">
@@ -62,7 +62,7 @@ const SuccessMessage = (props) => {
         </p>
       </div>
     </div>
-  ) : props.submit == "loading payment charge" ? (
+  ) : props.submit === "loading payment charge" ? (
     <div className="ui icon message" style={{ position: "fixed", top: "0" }}>
       <i className="notched circle loading icon"></i>
       <div className="content">
@@ -70,14 +70,14 @@ const SuccessMessage = (props) => {
         <p>Charging your credit card currently...</p>
       </div>
     </div>
-  ) : props.submit == "success" ? (
+  ) : props.submit === "success" ? (
     <div className="ui success message" style={{ position: "fixed", top: "0" }}>
       <div className="header">
         Your student dancer registration was successful.
       </div>
       <p>Please check your email for a receipt.</p>
     </div>
-  ) : props.submit == "error" ? (
+  ) : props.submit === "error" ? (
     <div className="ui error message" style={{ position: "fixed", top: "0" }}>
       <div className="header">There were some errors with your submission</div>
       <ul className="list">

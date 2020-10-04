@@ -1,6 +1,5 @@
 import * as EmailValidator from "email-validator";
 import * as PhoneValidator from "phone";
-import { parentTemplate } from "../../constants/index";
 import firebase from "firebase";
 export const isPhoneNumberValid = (phone) => {
   return PhoneValidator(phone, "", true).length > 0;
@@ -32,7 +31,7 @@ export const formatText = (str) => {
   let strArr = str.split(/(?=[A-Z])/);
   strArr = strArr.map((str) => {
     let temp = str.toLowerCase();
-    if (temp != "and") {
+    if (temp !== "and") {
       return temp.charAt(0).toUpperCase() + str.slice(1);
     } else {
       return temp;

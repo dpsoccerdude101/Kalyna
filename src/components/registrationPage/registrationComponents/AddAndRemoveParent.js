@@ -8,21 +8,6 @@ import {
 } from "./Parents/parentTypes";
 
 const AddAndRemoveParent = (props) => {
-  //immediately invoked function
-  const type = (() => {
-    switch (props.type) {
-      case MOTHER:
-        return "Mother";
-      case FATHER:
-        return "Father";
-      case LEGAL_GUARDIAN:
-        return "Legal Guardian";
-      case EMERGENCY_CONTACT:
-        return "Emergency Contact";
-      default:
-        return "Parent";
-    }
-  })();
   return (
     <>
       <button
