@@ -1,0 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Aguafina+Script&display=swap");
+.line {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: space-between;
+}
+input[type="radio"] {
+  border: 1px solid #000;
+  padding: 0.5em;
+  -webkit-appearance: none;
+}

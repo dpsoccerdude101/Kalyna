@@ -1,0 +1,48 @@
+{
+  "name": "react-firebase",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@stripe/react-stripe-js": "^1.1.2",
+    "@stripe/stripe-js": "^1.9.0",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "email-validator": "^2.0.4",
+    "firebase": "^7.22.0",
+    "phone": "^2.4.16",
+    "postcode-validator": "^3.1.0",
+    "proptypes": "^1.1.0",
+    "react": "^16.13.1",
+    "react-credit-card-input": "^1.1.5",
+    "react-date-picker": "^8.0.3",
+    "react-datepicker": "^3.2.2",
+    "react-dom": "^16.13.1",
+    "react-scripts": "3.4.3",
+    "semantic-ui-calendar": "0.0.8",
+    "semantic-ui-css": "^2.4.1",
+    "styled-components": "^5.2.0",
+    "yarn": "^1.22.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

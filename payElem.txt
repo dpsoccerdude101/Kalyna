@@ -1,6 +1,0 @@
-<PaymentInformation
-          totalTuition={totalTuition}
-          setTotalTuition={setTotalTuition}
-          students={students}
-          volunteer={volunteer}
-        />
