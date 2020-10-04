@@ -57,78 +57,6 @@ const RegistrationPage = (props) => {
     fetchData();
   }, []);
 
-  /* useEffect(() => {
-    if (submit == "payment accepted") {
-      setStudents((students) => {
-        let tempArr = [...students];
-        const modifiedTempArr = tempArr.map((student) => {
-          return { ...student, paidTuition: true };
-        });
-        return modifiedTempArr;
-      });
-      setSubmit((submit) => "loading");
-    }
-  }, [submit]);
-*/
-  /* useEffect(() => {
-    if (submit == "volunteer role") {
-      setFormArr((formArr) =>
-        constructFormArr([students, parents, emergencyContacts])
-      );
-    }
-  }, [submit]); */
-
-  /**
-   * This gets all of the current students in the db to check for any matches
-   */
-  /*   useEffect(() => {
-    if (formArr.length > 0) {
-      (async () => {
-        const db = firebase.firestore();
-        const data = await db.collection("studentsNames").get();
-        setImportedData(
-          data.docs.map((doc) => ({
-            ...doc.data(),
-            id: doc.id,
-          }))
-        );
-      })();
-    }
-  }, [formArr]); */
-  /**
-   * This checks if any of the submitted students match any of the
-   * existing students in the db.
-   */
-
-  /*   useEffect(() => {
-    if (
-      submit == "payment intent accepted" &&
-      formArr.length > 0 &&
-      importedData.length > 0
-    ) {
-      setSubmit((submit) => "loading");
-      const onSubmit = async (student) => {
-        const db = firebase.firestore();
-        const length = (importedData.length + 1).toString();
-        setErrorMessage("");
-        await db
-          .collection("students")
-          .doc(length)
-          .set(student)
-          .then((response) => {
-            console.log(student + " successfully written!");
-            setSubmit((submit) => "success");
-            setErrorMessage("");
-          })
-          .catch(function (error) {
-            console.error("Error writing document: ", error);
-            setSubmit((submit) => "error");
-            setErrorMessage(error);
-          });
-      };
-      formArr.forEach((formObj) => onSubmit(formObj));
-    }
-  }, [submit]); */
   useEffect(() => {
     if (importedData.length > 0) {
       const formDoesMatchDocs = doesFormMatchExistingDocuments(
@@ -141,7 +69,7 @@ const RegistrationPage = (props) => {
         setSubmit("student already registered");
       }
     }
-  }, [importedData, students]);
+  }, [importedData]);
 
   /**
    *
@@ -214,7 +142,7 @@ const RegistrationPage = (props) => {
   /**
    * Runs all of the event-driven-programming after the submit button is pushed
    */
-  useEffect(() => submitReducer(submit, setSubmit), [submit, submitReducer]);
+  useEffect(() => submitReducer(submit, setSubmit), [submit]);
   return (
     <>
       <SuccessMessage submit={submit} errorMessage={errorMessage} />
