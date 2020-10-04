@@ -79,7 +79,14 @@ export const Student = (props) => {
           name="group"
           required
           readOnly={checked}
-          min="1"
+          //min="1"
+          min={() => {
+            const age = props.student.age;
+            if (age < 7) return 1;
+            else if (age < 11) return 2;
+            else if (age < 15) return 3;
+            else return 4;
+          }}
           max="4"
           value={props.student.group}
           onChange={(e) => handleChange(e, "group")}
@@ -243,7 +250,7 @@ export const Student = (props) => {
         />
       </section>
       <section className="line">
-        <label htmlFor="returningDancer">Are they a returning dancer?</label>
+        <label htmlFor="returningDancer">Returning dancer?</label>
         <input
           type="checkbox"
           name="returningDancer"

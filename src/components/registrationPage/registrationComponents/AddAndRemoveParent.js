@@ -19,7 +19,7 @@ const AddAndRemoveParent = (props) => {
             props.setParents([...props.parents].concat(parentTemplate));
         }}
       >
-        <i className="plus square outline icon" />
+        Add Parent <i className="plus square outline icon" />
       </button>
       <button
         className="ui icon button"
@@ -30,7 +30,7 @@ const AddAndRemoveParent = (props) => {
             props.setParents(props.parents.slice(0, -1));
         }}
       >
-        <i className="minus square outline icon" />
+        Remove Parent <i className="minus square outline icon" />
       </button>
     </>
   );

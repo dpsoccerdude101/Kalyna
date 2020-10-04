@@ -12,7 +12,7 @@ const AddAndRemoveStudent = (props) => {
           props.setStudents([...props.students].concat(studentTemplate));
         }}
       >
-        <i className="plus square outline icon"></i>
+        Add Student <i className="plus square outline icon"></i>
       </button>
       <button
         className="ui icon button"
@@ -23,7 +23,7 @@ const AddAndRemoveStudent = (props) => {
             props.setStudents(props.students.slice(0, -1));
         }}
       >
-        <i className="minus square outline icon" />
+        Remove Student <i className="minus square outline icon" />
       </button>
     </>
   );
