@@ -182,18 +182,17 @@ export const doesFormMatchExistingDocuments = (data, studentsObjs) => {
   return false;
 };
 
-
 /**
  *
  * @param {*} student
  * @param {*} importedData
- * @param {*} setSubmit
  * @param {*} setErrorMessage
  * @returns {boolean} isStudentWrittentoDB
  */
 export const writeFormArrToDB = async (
   student,
   importedData,
+  setErrorMessage
 ) => {
   const db = firebase.firestore();
   const length = (importedData.length + 1).toString();
@@ -207,6 +206,7 @@ export const writeFormArrToDB = async (
     })
     .catch(function (error) {
       console.error("Error writing document: ", error);
+      setErrorMessage(() => error);
       return false;
     });
 };

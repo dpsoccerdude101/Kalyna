@@ -37,7 +37,7 @@ const RegistrationPage = (props) => {
   const [formArr, setFormArr] = useState([]);
   const [cardFulfilled, setCardFulfilled] = useState();
   const [importedVolunteerData, setImportedVolunteerData] = useState([]);
-  const [error, setError] = useState();
+  const [error, setError] = useState("");
 
   /**
    * This gets all of the available volunteer positions to hydrate the webpage with
@@ -145,7 +145,7 @@ const RegistrationPage = (props) => {
   useEffect(() => submitReducer(submit, setSubmit), [submit]);
   return (
     <>
-      <SuccessMessage submit={submit} errorMessage={errorMessage} />
+      <SuccessMessage submit={submit} error={error} />
       <div id="studentInformation">
         <h1>2020/21 Student Registration</h1>
         <form onSubmit={(e) => formValidation(e)}>

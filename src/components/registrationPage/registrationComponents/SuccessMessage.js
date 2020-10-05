@@ -1,7 +1,11 @@
 import React from "react";
 
 const SuccessMessage = (props) => {
-  return props.submit === "loading" ? (
+  return props.error !== "" ? (
+    <div className="ui error message" style={{ position: "fixed", top: "0" }}>
+      <div className="header">{props.error}</div>
+    </div>
+  ) : props.submit === "loading" ? (
     <div className="ui icon message" style={{ position: "fixed", top: "0" }}>
       <i className="notched circle loading icon"></i>
       <div className="content">
@@ -20,7 +24,7 @@ const SuccessMessage = (props) => {
       </div>
     </div>
   ) : props.submit === "student already registered" ? (
-    <div className="ui error message">
+    <div className="ui error message" style={{ position: "fixed", top: "0" }}>
       <div className="header">
         The student you have entered is already registered.
       </div>
@@ -28,8 +32,7 @@ const SuccessMessage = (props) => {
         <li>You must include both a new student to be registered.</li>
       </ul>
     </div>
-  ) 
-  : props.submit === "loading payment" ? (
+  ) : props.submit === "loading payment" ? (
     <div className="ui icon message" style={{ position: "fixed", top: "0" }}>
       <i className="notched circle loading icon"></i>
       <div className="content">
