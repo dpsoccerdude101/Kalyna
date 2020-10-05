@@ -5,7 +5,11 @@ import {
   isPhoneNumberValid,
 } from "../../../functions/functions";
 import firebase from "firebase";
-import { getAge, formatMailingAddress } from "./studentFunctions";
+import {
+  getAge,
+  formatMailingAddress,
+  getGroupByGradeAndSex,
+} from "./studentFunctions";
 import States from "./States";
 import DatePicker from "react-date-picker";
 import { postcodeValidator } from "postcode-validator";
@@ -17,6 +21,9 @@ export const Student = (props) => {
   const [checked, setChecked] = useState(false);
   const handleChange = (event, property) => {
     const value = event.target.value;
+    props.setStudent({ ...props.student, [property]: value });
+  };
+  const handleGroupChange = (value, property) => {
     props.setStudent({ ...props.student, [property]: value });
   };
   const handleCheckChange = (checkedValue, property) => {
@@ -35,6 +42,13 @@ export const Student = (props) => {
   useEffect(() => {
     handleChangeAge(getAge(props.student.dateOfBirth), "age");
   }, [props.student.dateOfBirth]);
+  useEffect(() => {
+    getGroupByGradeAndSex(
+      props.student.grade,
+      props.student.sex,
+      handleGroupChange
+    );
+  }, [props.student.grade, props.student.sex]);
   return (
     <>
       <section className="line">
@@ -54,6 +68,16 @@ export const Student = (props) => {
           value={props.student.lastName}
           onChange={(e) => handleChange(e, "lastName")}
         />
+        <label htmlFor="sex">Sex</label>
+        <select
+          name="sex"
+          required
+          value={props.student.sex}
+          onChange={(e) => handleChange(e, "sex")}
+        >
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
         <label htmlFor="dateOfBirth">Date of Birth (mm/dd/year)</label>
         <DatePicker
           value={props.student.dateOfBirth}
@@ -65,31 +89,35 @@ export const Student = (props) => {
           minDate={new Date("January 1, 2000 00:00:00")}
         />
         <label htmlFor="grade">Grade</label>
-        <input
-          type="number"
+        <select
           name="grade"
-          min="1"
           required
           value={props.student.grade}
-          onChange={(e) => handleChange(e, "grade")}
-        />
+          onChange={(e) => {
+            handleChange(e, "grade");
+          }}
+        >
+          <option value="Pre-K">Pre-K</option>
+          <option value="Kindergarten">Kindergarten</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+        </select>
         <label htmlFor="group">Group</label>
         <input
           type="number"
           name="group"
-          required
-          readOnly={checked}
-          //min="1"
-          min={() => {
-            const age = props.student.age;
-            if (age < 7) return 1;
-            else if (age < 11) return 2;
-            else if (age < 15) return 3;
-            else return 4;
-          }}
-          max="4"
+          readOnly
           value={props.student.group}
-          onChange={(e) => handleChange(e, "group")}
         />
       </section>
       <section
@@ -261,30 +289,6 @@ export const Student = (props) => {
             handleCheckChange(e.target.checked, "returningDancer");
           }}
         />
-        {props.student.returningDancer ? (
-          <>
-            <label htmlFor="returningDancer">
-              What dance group were you in last year?
-            </label>
-            <input
-              type="number"
-              name="returningDancerGroup"
-              required
-              value={props.student.group}
-              min="1"
-              max="4"
-              onChange={(e) => handleChange(e, "group")}
-            />
-            <h5>
-              <i>
-                If you are a returning dancer, your group will not change from
-                last year due to dancers only having a half year of instruction.
-              </i>
-            </h5>
-          </>
-        ) : (
-          <></>
-        )}
       </section>
     </>
   );
