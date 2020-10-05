@@ -198,7 +198,7 @@ export const writeFormArrToDB = async (
   const db = firebase.firestore();
   const length = (importedData.length + 1).toString();
   await db
-    .collection("students")
+    .collection("testStudents")
     .doc(length)
     .set(student)
     .then((response) => {
@@ -213,7 +213,7 @@ export const writeFormArrToDB = async (
 
 export const initializeImportedData = async (setImportedData) => {
   const db = firebase.firestore();
-  const data = await db.collection("studentsNames").get();
+  const data = await db.collection("testStudentsNames").get();
   setImportedData(
     data.docs.map((doc) => ({
       ...doc.data(),

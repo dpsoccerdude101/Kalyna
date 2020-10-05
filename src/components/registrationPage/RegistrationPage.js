@@ -46,7 +46,6 @@ const RegistrationPage = (props) => {
     const fetchData = async () => {
       const db = firebase.firestore();
       const data = await db.collection("availableVolunteerRoles").get();
-      //setImportedVolunteerDataLength(data.size);
       setImportedVolunteerData(
         data.docs.map((doc) => ({
           ...doc.data(),
