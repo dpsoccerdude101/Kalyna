@@ -10,7 +10,7 @@ export const studentTemplate = {
   mailingAddress: "",
   address: "",
   city: "",
-  state: "",
+  state: "NY",
   zip: "",
   mobile: "",
   email: "",
