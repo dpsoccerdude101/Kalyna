@@ -133,8 +133,8 @@ const RegistrationPage = (props) => {
        */
       if (volunteerRole !== "") {
         addVolunteerRoleToPerson(
-          [parents, students, emergencyContacts],
-          [setParents, setStudents, setEmergencyContacts],
+          [parents, emergencyContacts],
+          [setParents, setEmergencyContacts],
           volunteerFullName,
           volunteerRole
         );

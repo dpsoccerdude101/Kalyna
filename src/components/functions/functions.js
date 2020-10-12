@@ -15,16 +15,17 @@ export const isEmailValid = (email) => {
   return re.test(email.toLowerCase()) && EmailValidator.validate(email);
 };
 export const isVolunteerNameValid = (fullName, stateChecklist) => {
-  let fullnames = [];
-  stateChecklist.forEach((user) => {
-    if (user.length >= 1) {
-      user.forEach((person) => {
-        fullnames.push(person.firstName + " " + person.lastName);
-      });
-    }
-  });
-  //console.log(fullnames.indexOf(fullName));
-  return fullnames.indexOf(fullName) >= 0 ? true : false;
+  return (
+    stateChecklist
+      .map((users) => {
+        if (users.length >= 1) {
+          return users.map(
+            (person) => person.firstName + " " + person.lastName
+          );
+        } else return [""];
+      })
+      .indexOf(fullName) >= 0
+  );
 };
 
 export const formatText = (str) => {
