@@ -192,25 +192,12 @@ export const doesFormMatchExistingDocuments = (data, studentsObjs) => {
  * @param {*} setErrorMessage
  * @returns {boolean} isStudentWrittentoDB
  */
-<<<<<<< HEAD
-export const writeFormArrToDB = async (
-  student,
-  importedData,
-  setErrorMessage
-) => {
-=======
 export const writeFormArrToDB = async (student, length, setErrorMessage) => {
->>>>>>> 86d4e1dc... hotfix for submitting multiple students
   const db = firebase.firestore();
   const lengthStr = length.toString();
   await db
-<<<<<<< HEAD
     .collection("students")
-    .doc(length)
-=======
-    .collection("testStudents")
     .doc(lengthStr)
->>>>>>> 86d4e1dc... hotfix for submitting multiple students
     .set(student)
     .then((response) => {
       console.log(student + " successfully written!");
@@ -218,24 +205,14 @@ export const writeFormArrToDB = async (student, length, setErrorMessage) => {
     })
     .catch(function (error) {
       console.error("Error writing document: ", error);
-<<<<<<< HEAD
-      setErrorMessage(() => error);
-=======
       setErrorMessage(error);
->>>>>>> 86d4e1dc... hotfix for submitting multiple students
       return false;
     });
 };
 
 export const initializeImportedData = async (setImportedData) => {
   const db = firebase.firestore();
-<<<<<<< HEAD
   const data = await db.collection("studentsNames").get();
-=======
-  console.dir(db);
-  const data = await db.collection("testStudentsNames").get();
-  console.dir(data);
->>>>>>> 86d4e1dc... hotfix for submitting multiple students
   setImportedData(
     data.docs.length > 0
       ? data.docs.map((doc) => ({
