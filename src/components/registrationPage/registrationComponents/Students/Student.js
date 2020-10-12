@@ -189,12 +189,14 @@ export const Student = (props) => {
               handleChange(e, "mobile");
           }}
           onBlur={(e) => {
-            if (!isPhoneNumberValid(e.target.value))
-              e.target.setCustomValidity(
-                e.target.value +
-                  " is not valid. Try entering a different phone number"
-              );
-            else e.target.setCustomValidity("");
+            if (e.target.value.length > 0) {
+              if (!isPhoneNumberValid(e.target.value))
+                e.target.setCustomValidity(
+                  e.target.value +
+                    " is not valid. Try entering a different phone number"
+                );
+              else e.target.setCustomValidity("");
+            } else e.target.setCustomValidity("");
           }}
         />
         {props.student.mobile.length > 0 ? (
@@ -255,11 +257,13 @@ export const Student = (props) => {
           value={props.student.email}
           onChange={(e) => handleChange(e, "email")}
           onBlur={(e) => {
-            if (!isEmailValid(e.target.value))
-              e.target.setCustomValidity(
-                e.target.value + " not valid. Try entering a different email."
-              );
-            else e.target.setCustomValidity("");
+            if (e.target.value.length > 0) {
+              if (!isEmailValid(e.target.value))
+                e.target.setCustomValidity(
+                  e.target.value + " not valid. Try entering a different email."
+                );
+              else e.target.setCustomValidity("");
+            } else e.target.setCustomValidity("");
           }}
         />
       </section>
