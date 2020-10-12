@@ -82,11 +82,11 @@ const RegistrationPage = (props) => {
         initializeImportedData(setImportedData);
         break;
       case "payment accepted":
-        addPaidTuitionAttributeToEachStudent(setStudents);
-        stateModifier((submit) => "construct formArr");
+        addPaidTuitionAttributeToEachStudent(students, setStudents);
+        stateModifier(() => "construct formArr");
         break;
       case "construct formArr":
-        setFormArr((formArr) =>
+        setFormArr(() =>
           constructFormArr([students, parents, emergencyContacts])
         );
         stateModifier("formArr constructed");
@@ -95,12 +95,15 @@ const RegistrationPage = (props) => {
         alert("This student has already been registered.");
         break;
       case "formArr constructed":
+        console.dir(formArr);
         if (formArr.length > 0 && importedData.length > 0) {
-          stateModifier((submit) => "loading");
+          stateModifier(() => "loading");
+          let length = importedData.length + 1;
           for (const student of formArr) {
-            writeFormArrToDB(student, importedData, setErrorMessage)
-              ? stateModifier((submit) => "success")
-              : stateModifier((submit) => "failure");
+            writeFormArrToDB(student, length, setErrorMessage)
+              ? stateModifier(() => "success")
+              : stateModifier(() => "error");
+              length++;
           }
         }
         break;

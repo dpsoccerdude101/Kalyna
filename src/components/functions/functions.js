@@ -67,24 +67,27 @@ export const addVolunteerRoleToPerson = (
   });
 };
 
+/**
+ *
+ * @param {[Array<Objects>, Array<Objects>, Array<Objects>]} param0
+ */
 export const constructFormArr = ([students, parents, emergencyContacts]) => {
-  let tempFormArr = [];
-  students.forEach((student) => {
+  return students.map((student) => {
     let studentObj = { ...student };
-    parents.map((parent, index) => {
-      let motherTitle = "parent" + index;
-      studentObj = { ...studentObj, [motherTitle]: { ...parent } };
-    });
-    emergencyContacts.map((emergencyContact, index) => {
-      studentObj = {
-        ...studentObj,
-        emergencyContact: { ...emergencyContact },
-      };
-    });
-    tempFormArr = [...tempFormArr, { ...studentObj }];
+    let count = 0;
+    for (const parent of parents) {
+      let parentTitle = "parent" + count;
+      studentObj = { ...studentObj, [parentTitle]: { ...parent } };
+      count++;
+    }
+    studentObj = {
+      ...studentObj,
+      emergencyContact: { ...emergencyContacts[0] },
+    };
+    return studentObj;
   });
-  return [...tempFormArr];
 };
+
 /**
  *
  * @param {Event} e
@@ -97,7 +100,7 @@ export const getAllRequiredInputs = (e) => {
  *
  * @param {NodeListOf<HTMLInputElement>} requiredInputs
  * @param {*} cardFulfilled
- * @param {[[parentTemplate], [parentTemplate]]} param2
+ * @param {[{}[], [parentTemplate]]} param2
  * @param {String} volunteerRole
  * @param {String} volunteerFullName
  */
@@ -189,16 +192,25 @@ export const doesFormMatchExistingDocuments = (data, studentsObjs) => {
  * @param {*} setErrorMessage
  * @returns {boolean} isStudentWrittentoDB
  */
+<<<<<<< HEAD
 export const writeFormArrToDB = async (
   student,
   importedData,
   setErrorMessage
 ) => {
+=======
+export const writeFormArrToDB = async (student, length, setErrorMessage) => {
+>>>>>>> 86d4e1dc... hotfix for submitting multiple students
   const db = firebase.firestore();
-  const length = (importedData.length + 1).toString();
+  const lengthStr = length.toString();
   await db
+<<<<<<< HEAD
     .collection("students")
     .doc(length)
+=======
+    .collection("testStudents")
+    .doc(lengthStr)
+>>>>>>> 86d4e1dc... hotfix for submitting multiple students
     .set(student)
     .then((response) => {
       console.log(student + " successfully written!");
@@ -206,25 +218,48 @@ export const writeFormArrToDB = async (
     })
     .catch(function (error) {
       console.error("Error writing document: ", error);
+<<<<<<< HEAD
       setErrorMessage(() => error);
+=======
+      setErrorMessage(error);
+>>>>>>> 86d4e1dc... hotfix for submitting multiple students
       return false;
     });
 };
 
 export const initializeImportedData = async (setImportedData) => {
   const db = firebase.firestore();
+<<<<<<< HEAD
   const data = await db.collection("studentsNames").get();
+=======
+  console.dir(db);
+  const data = await db.collection("testStudentsNames").get();
+  console.dir(data);
+>>>>>>> 86d4e1dc... hotfix for submitting multiple students
   setImportedData(
-    data.docs.map((doc) => ({
-      ...doc.data(),
-      id: doc.id,
-    }))
+    data.docs.length > 0
+      ? data.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }))
+      : [
+          {
+            firstName: "aaaaaaaaaa",
+            lastName: "aaaaaaaaaaaaa",
+            group: 6,
+            id: 0,
+          },
+        ]
   );
 };
-
-export const addPaidTuitionAttributeToEachStudent = (setStudents) => {
-  setStudents((students) => {
-    let tempArr = [...students];
+/**
+ *
+ * @param {{}[]} students
+ * @param {React.Dispatch<React.SetStateAction<{}[]>>} setStudents
+ */
+export const addPaidTuitionAttributeToEachStudent = (students, setStudents) => {
+  setStudents(() => {
+    const tempArr = [...students];
     const modifiedTempArr = tempArr.map((student) => {
       return { ...student, paidTuition: "yes" };
     });

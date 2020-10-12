@@ -8,7 +8,7 @@ const MapStudents = (props) => {
         props.students.map((student, index) => {
           return (
             <Student
-               key={index} 
+              key={index}
               student={student}
               setStudent={(newStudent) =>
                 props.setStudents(() => {
