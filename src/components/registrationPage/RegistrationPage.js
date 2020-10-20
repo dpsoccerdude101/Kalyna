@@ -106,6 +106,7 @@ const RegistrationPage = (props) => {
               ? stateModifier(() => "success")
               : stateModifier(() => "error");
             length++;
+            firebase.analytics().logEvent("new_student_registered", student);
           }
         }
         break;
