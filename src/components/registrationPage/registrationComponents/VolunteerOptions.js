@@ -28,20 +28,29 @@ const VolunteerOptions = (props) => {
           value={props.volunteerFullName}
           onChange={(e) => props.setVolunteerFullName(e.target.value)}
         >
-          {props.parents.map((parent) => (
-            <option value={parent.firstName + " " + parent.lastName}>
-              {parent.firstName + " " + parent.lastName}
-            </option>
-          ))}
-          {props.emergencyContacts.map((emergencyContact) => (
-            <option
-              value={
-                emergencyContact.firstName + " " + emergencyContact.lastName
-              }
-            >
-              {emergencyContact.firstName + " " + emergencyContact.lastName}
-            </option>
-          ))}
+          {props.parents.map((parent) =>
+            parent.firstName != "" && parent.lastName != "" ? (
+              <option value={parent.firstName + " " + parent.lastName}>
+                {parent.firstName + " " + parent.lastName}
+              </option>
+            ) : (
+              <></>
+            )
+          )}
+          {props.emergencyContacts.map((emergencyContact) =>
+            emergencyContact.firstName != "" &&
+            emergencyContact.lastName != "" ? (
+              <option
+                value={
+                  emergencyContact.firstName + " " + emergencyContact.lastName
+                }
+              >
+                {emergencyContact.firstName + " " + emergencyContact.lastName}
+              </option>
+            ) : (
+              <></>
+            )
+          )}
         </select>
         <div name="roleDiv">
           <label htmlFor="role">Role</label>
