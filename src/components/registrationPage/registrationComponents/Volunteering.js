@@ -66,6 +66,8 @@ const Volunteering = (props) => {
           volunteer={props.volunteer}
           stateChecklist={props.stateChecklist}
           importedVolunteerData={props.importedVolunteerData}
+          parents={props.parents}
+          emergencyContacts={props.emergencyContacts}
         />
       ) : (
         <></>

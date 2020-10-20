@@ -14,7 +14,7 @@ export const isEmailValid = (email) => {
    */
   return re.test(email.toLowerCase()) && EmailValidator.validate(email);
 };
-export const isVolunteerNameValid = (fullName, stateChecklist) => {
+/* export const isVolunteerNameValid = (fullName, stateChecklist) => {
   return (
     stateChecklist
       .map((users) => {
@@ -26,7 +26,7 @@ export const isVolunteerNameValid = (fullName, stateChecklist) => {
       })
       .indexOf(fullName) >= 0
   );
-};
+}; */
 
 export const formatText = (str) => {
   let strArr = str.split(/(?=[A-Z])/);
@@ -127,16 +127,6 @@ export const isFormValid = (
   if (!cardFulfilled) {
     alert("Credit Card information is not complete.");
     return false;
-  }
-  if (volunteerRole != "") {
-    if (
-      !isVolunteerNameValid(volunteerFullName, [parents, emergencyContacts])
-    ) {
-      alert(
-        "The name of the Volunteer entered does not match any of the names of the Student's contacts. Please enter a parent's name."
-      );
-      return false;
-    }
   }
   for (const input of requiredInputs) input.reportValidity();
 

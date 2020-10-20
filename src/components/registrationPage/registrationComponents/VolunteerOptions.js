@@ -13,17 +13,38 @@ const VolunteerOptions = (props) => {
     <>
       <br />
       <section className="line">
-        <label htmlFor="volunteerFullName">Volunteer's Full Name</label>
+        {/*  <label htmlFor="volunteerFullName">Volunteer's Full Name</label>
         <input
           type="text"
           name="volunteerFullName"
           required={props.volunteer == "yes"}
           value={props.volunteerFullName}
           onChange={(e) => props.setVolunteerFullName(e.target.value)}
-        />
+        /> */}
+        <label htmlFor="volunteerFullName">Parent Volunteer</label>
+        <select
+          name="volunteerFullName"
+          required={props.volunteer == "yes"}
+          value={props.volunteerFullName}
+          onChange={(e) => props.setVolunteerFullName(e.target.value)}
+        >
+          {props.parents.map((parent) => (
+            <option value={parent.firstName + " " + parent.lastName}>
+              {parent.firstName + " " + parent.lastName}
+            </option>
+          ))}
+          {props.emergencyContacts.map((emergencyContact) => (
+            <option
+              value={
+                emergencyContact.firstName + " " + emergencyContact.lastName
+              }
+            >
+              {emergencyContact.firstName + " " + emergencyContact.lastName}
+            </option>
+          ))}
+        </select>
         <div name="roleDiv">
           <label htmlFor="role">Role</label>
-
           <select
             name="role"
             required={props.volunteer == "yes"}

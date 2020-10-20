@@ -98,12 +98,14 @@ const RegistrationPage = (props) => {
         console.dir(formArr);
         if (formArr.length > 0 && importedData.length > 0) {
           stateModifier(() => "loading");
-          let length = importedData.length + 1;
+          //get id of last student
+          let length =
+            parseInt(importedData[importedData.length - 1].id, 10) + 1;
           for (const student of formArr) {
             writeFormArrToDB(student, length, setErrorMessage)
               ? stateModifier(() => "success")
               : stateModifier(() => "error");
-              length++;
+            length++;
           }
         }
         break;
@@ -169,6 +171,8 @@ const RegistrationPage = (props) => {
             volunteer={volunteer}
             setVolunteer={setVolunteer}
             importedVolunteerData={importedVolunteerData}
+            parents={parents}
+            emergencyContacts={emergencyContacts}
           />
           <hr />
           <Tuition
