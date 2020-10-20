@@ -8,7 +8,7 @@ import CheckoutForm from "./CheckoutForm";
 // recreating the Stripe object on every render.
 // loadStripe is initialized with your real live publishable API key.
 const promise = loadStripe(
-  "pk_live_51HQEiuE35lRR4iPL4I6vRsCpNOB8EGOPJAUe7nQ4Kb3cQjwMWVyTyaIJAJM30QyT5ilxnPjBszpLuUq8e8VyFfAb00GmCL3teQ"
+  "pk_test_51HQEiuE35lRR4iPLZesQ19qI2NUqwXmY02N9YPEeUeKCh0XNmR9ly4yoW5H9hLH5glUR4GKmhsWSl0KHCJX9406C004Gmlxvmo"
 );
 
 const PaymentInformation = (props) => {
