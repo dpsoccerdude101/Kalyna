@@ -30,7 +30,7 @@ const CheckoutForm = (props) => {
             )
         );
         //Make the API Request
-        const api = await fetchFromAPI("test-Payments", {
+        const api = await fetchFromAPI("test-payments", {
           body: { amount: validAmount, email: props.email },
           // body: { amount: validAmount , email: props.email}, 
         });
