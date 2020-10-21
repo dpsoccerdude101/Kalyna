@@ -43,28 +43,38 @@ export const formatText = (str) => {
 
 //adds volunteerRole key value pair to the person that matches the volunteer name
 export const addVolunteerRoleToPerson = (
-  stateChecklist,
-  setterStateChecklist,
+  parents,
+  setParents,
   volunteerFullName,
-  volunteerRole
+  volunteerRole,
+  setVolunteerObj
 ) => {
-  let masterIndex = 0;
-  let modifiedPersonType = {};
-  stateChecklist.forEach((personType, index) => {
-    personType.forEach((person, count) => {
-      if (person.firstName + " " + person.lastName == volunteerFullName) {
-        //console.log("found");
-        masterIndex = index;
-        let tempArr = [...personType];
-        tempArr[count] = {
-          ...person,
-          volunteerRole: volunteerRole,
-        };
-        //console.log(tempArr);
-        modifiedPersonType = tempArr;
-        setterStateChecklist[index]((prevArr) => tempArr);
-      }
+  parents.forEach((parent, count) => {
+    console.log("parent: " + parent.firstName + " " + parent.lastName);
+    console.log(volunteerFullName);
+    console.dir({
+      email: parent.email,
+      name: volunteerFullName,
+      phoneNumber: parent.mobile,
     });
+    if (parent.firstName + " " + parent.lastName == volunteerFullName) {
+      setVolunteerObj({
+        email: parent.email,
+        name: volunteerFullName,
+        phoneNumber: parent.mobile,
+      });
+      console.dir({
+        email: parent.email,
+        name: volunteerFullName,
+        phoneNumber: parent.mobile,
+      });
+      let tempArr = [...parents];
+      tempArr[count] = {
+        ...parent,
+        volunteerRole: volunteerRole,
+      };
+      setParents(() => tempArr);
+    }
   });
 };
 
@@ -105,13 +115,7 @@ export const getAllRequiredInputs = (e) => {
  * @param {String} volunteerRole
  * @param {String} volunteerFullName
  */
-export const isFormValid = (
-  requiredInputs,
-  cardFulfilled,
-  [parents, emergencyContacts],
-  volunteerRole,
-  volunteerFullName
-) => {
+export const isFormValid = (requiredInputs, cardFulfilled, parents) => {
   /*
    * Check for minimum one parent + emergency contact
    */
@@ -195,6 +199,38 @@ export const writeFormArrToDB = async (student, length, setErrorMessage) => {
       return true;
     })
     .catch(function (error) {
+      console.error("Error writing document: ", error);
+      setErrorMessage(error);
+      return false;
+    });
+};
+export const writeVolunteerObjToDB = async (
+  volunteerObj,
+  volunteerID,
+  setErrorMessage
+) => {
+  const db = firebase.firestore();
+  await db
+    .collection("volunteerRoles")
+    .doc(volunteerID)
+    .set(volunteerObj, { merge: true })
+    .then((response) => {
+      firebase
+        .analytics()
+        .logEvent(
+          "new_volunteer_added",
+          JSON.stringify(volunteerObj) + response
+        );
+      console.log(volunteerObj + " successfully written!");
+      return true;
+    })
+    .catch(function (error) {
+      firebase
+        .analytics()
+        .logEvent(
+          "new_volunteer_added_failure",
+          JSON.stringify(volunteerObj) + error
+        );
       console.error("Error writing document: ", error);
       setErrorMessage(error);
       return false;

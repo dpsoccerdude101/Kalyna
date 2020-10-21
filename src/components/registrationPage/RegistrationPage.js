@@ -17,6 +17,7 @@ import {
   writeFormArrToDB,
   initializeImportedData,
   addPaidTuitionAttributeToEachStudent,
+  writeVolunteerObjToDB,
 } from "../functions/functions";
 import SuccessMessage from "./registrationComponents/SuccessMessage";
 
@@ -29,6 +30,8 @@ const RegistrationPage = (props) => {
   const [digitalSignature, setDigitalSignature] = useState("");
   const [volunteerRole, setVolunteerRole] = useState("");
   const [volunteerFullName, setVolunteerFullName] = useState("");
+  const [volunteerID, setVolunteerID] = useState("");
+  const [volunteerObj, setVolunteerObj] = useState({});
   const [totalTuition, setTotalTuition] = useState(0);
   const [agreementToCodeOfConduct, setAgreementToCodeOfConduct] = useState();
   const [submit, setSubmit] = useState("");
@@ -46,7 +49,6 @@ const RegistrationPage = (props) => {
     const fetchData = async () => {
       const db = firebase.firestore();
       const data = await db.collection("availableVolunteerRoles").get();
-      //setImportedVolunteerDataLength(data.size);
       setImportedVolunteerData(
         data.docs.map((doc) => ({
           ...doc.data(),
@@ -101,6 +103,11 @@ const RegistrationPage = (props) => {
           //get id of last student
           let length =
             parseInt(importedData[importedData.length - 1].id, 10) + 1;
+          if (volunteerObj != {}) {
+            writeVolunteerObjToDB(volunteerObj, volunteerID, setErrorMessage)
+              ? stateModifier(() => "success")
+              : stateModifier(() => "error");
+          }
           for (const student of formArr) {
             writeFormArrToDB(student, length, setErrorMessage)
               ? stateModifier(() => "success")
@@ -122,24 +129,18 @@ const RegistrationPage = (props) => {
     e.preventDefault();
     const requiredInputs = getAllRequiredInputs(e);
     console.log(requiredInputs);
-    if (
-      isFormValid(
-        requiredInputs,
-        cardFulfilled,
-        [parents, emergencyContacts],
-        volunteerRole,
-        volunteerFullName
-      )
-    ) {
+    if (isFormValid(requiredInputs, cardFulfilled, parents)) {
       /**
-       * If a volunteer role is chosen then append it as a property to that person object
+       * If a volunteer role is chosen then append it as a property to that person object.
+       * Also set the VolunteerObj.
        */
-      if (volunteerRole !== "") {
+      if (volunteer == "yes") {
         addVolunteerRoleToPerson(
-          [parents, emergencyContacts],
-          [setParents, setEmergencyContacts],
+          parents,
+          setParents,
           volunteerFullName,
-          volunteerRole
+          volunteerRole,
+          setVolunteerObj
         );
       }
       setSubmit("loading payment");
@@ -174,6 +175,9 @@ const RegistrationPage = (props) => {
             importedVolunteerData={importedVolunteerData}
             parents={parents}
             emergencyContacts={emergencyContacts}
+            volunteerID={volunteerID}
+            setVolunteerID={setVolunteerID}
+            parents={parents}
           />
           <hr />
           <Tuition
