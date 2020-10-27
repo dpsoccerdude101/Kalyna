@@ -103,7 +103,7 @@ const RegistrationPage = (props) => {
           //get id of last student
           let length =
             parseInt(importedData[importedData.length - 1].id, 10) + 1;
-          if (volunteerObj != {}) {
+          if (JSON.stringify(volunteerObj) !== "{}") {
             writeVolunteerObjToDB(volunteerObj, volunteerID, setErrorMessage)
               ? stateModifier(() => "success")
               : stateModifier(() => "error");
