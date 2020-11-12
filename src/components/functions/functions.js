@@ -192,7 +192,7 @@ export const writeFormArrToDB = async (student, length, setErrorMessage) => {
   const lengthStr = length.toString();
   await db
     .collection("students")
-    .doc(lengthStr)
+    .doc()
     .set(student)
     .then((response) => {
       console.log(student + " successfully written!");
